@@ -7,9 +7,9 @@ For the store, I created basically a menu so my clients could choose what comman
 
 Features:
 * It has his own ecconomy system with his own currencies:
-     Users could transfer coins to each other
-     Users could buy cool things with the coins
-     All the currencies have dollar-backed value using requests
+     * Users could transfer coins to each other
+     * Users could buy cool things with the coins
+     * All the currencies have dollar-backed value using requests
 * marry users, same as divorcing
 * send cute photos of animals by command
 * ban/kick, give roles, unban users
