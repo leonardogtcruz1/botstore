@@ -1,35 +1,110 @@
-# botstore
+# BotStore — Modular All-in-One Discord Bot
 
-So I created this script when I was 14 and 15 years old (2021 - 2022), with the intention to have all the commands from a complete discord bot working sepparately, so I could sell parts of it in my discord bot store as fast as possible.
-For the store, I created basically a menu so my clients could choose what commands they would buy, each one costing around BRL$0,75, it depended of the command, some were more complex, so more expensive as well.
+Comprehensive modular **Discord bot** built with **Python**, **`discord.py`**, and **Pillow (PIL)** — originally created at ages 14–15 (2021–2022) as an interactive multi-category bot where server owners could browse, pick, and license individual feature packs (`$help`, `$cotacao`, `$animais`, `$administracao`, `$interacao`, `$infccoins`).
 
-*This code does not have the intention of being clean. I created it just so I could ctrl V + ctrl C and sell chunks of it sepparately. I was 14 when I wrote it, so disregard stupid code or features*
+![Python 3](https://img.shields.io/badge/Python-3.x-3776AB?style=flat-square&logo=python&logoColor=white)
+![discord.py](https://img.shields.io/badge/Discord-discord.py-5865F2?style=flat-square&logo=discord&logoColor=white)
+![Pillow](https://img.shields.io/badge/Imaging-Pillow%20ASCII-23A55A?style=flat-square)
+![AwesomeAPI FX](https://img.shields.io/badge/FX%20API-Live%20Rates-F0B232?style=flat-square)
 
-Features:
-* It has his own ecconomy system with his own currencies:
-     * Users could transfer coins to each other
-     * Users could buy cool things with the coins
-     * All the currencies have dollar-backed value using requests
-* marry users, same as divorcing
-* send cute photos of animals by command
-* ban/kick, give roles, unban users
-* Track users activities
-* Create ASCII art with the photo of choice of users or profile avatar 
-* kiss, punch, hug, slap, pet users
-* request any price of some currencies around the world
-* lock/unlock and clear chats
+[![BotStore Demo Preview](media/botstore-preview.gif)](media/botstore-demo-en.mp4)
 
-Dependencies:
-* discord.py
-* requests
-* PIL
+<p align="center">
+  <a href="media/botstore-demo-en.mp4">▶ Watch full 1080p @ 30fps MP4 demo</a>
+</p>
 
-How to run:
+---
+
+## Backstory
+
+> Built at age 14–15 (2021–2022) with the goal of having every command of a full-featured Discord bot organized in one place so custom bot packages could be assembled and sold modularly to server owners. Kept untouched in its authentic Python structure as an early portfolio milestone, now documented cleanly for browsing.
+
+---
+
+## Key Features & Command Reference (Prefix: `$`)
+
+### 1. Dollar-Backed Virtual Economy (`amounts.json` & `ddiamond.json`)
+- Fetches live USD → BRL exchange rates via `economia.awesomeapi.com.br` so virtual **DDiamonds** dynamically reflect currency changes.
+- Tracks user coin (`CCoins`) and diamond balances persisted locally in JSON.
+
+| Command | Description |
+| --- | --- |
+| `$ccoins` / `$infccoins` | View CCoins wallet info and currency rules |
+| `$ddiamonds` | Check your virtual DDiamond balance |
+| `$prcddiamond` | Live calculated DDiamond price backed by USD/BRL rate |
+| `$buyddiamond` / `$sellddiamond` | Buy or sell DDiamonds against your CCoins balance |
+| `$transferir @user <amount>` | Transfer CCoins directly to another guild member |
+| `$registrar` | Register a user wallet entry |
+
+### 2. Live Fiat & Crypto Market Quotes (`$cotacao`)
+| Command | Currency / Asset |
+| --- | --- |
+| `$dolar` | US Dollar (`USD → BRL`) |
+| `$euro` | Euro (`EUR → BRL`) |
+| `$iene` | Japanese Yen (`JPY → BRL`) |
+| `$yuan` | Chinese Yuan (`CNY → BRL`) |
+| `$bitcoin` | Bitcoin (`BTC → BRL`) |
+| `$etherium` | Ethereum (`ETH → BRL`) |
+| `$litecoin` | Litecoin (`LTC → BRL`) |
+
+### 3. ASCII Avatar & Image Generator (`$ascii` via `asciiBot.py`)
+- Converts any user profile avatar or local image into grayscale ASCII art using Pillow (`ASCII_CHARS = ["@", "#", "S", "%", "?", "*", "+", ";", ":", ",", "."]`).
+- Usage: `$ascii @user`
+
+### 4. Social, Marriage & Curated Animal Packs (`$interacao` & `$animais`)
+- **Marriage System (`casais.json`):** Propose with `$casar @user` (requires ❤️ confirmation within 30 seconds or 💔 decline), inspect marital status (`$casado`, `$casada`), or split (`$divorcio`).
+- **Roleplay GIF Reactions (`strings.py`):** `$hug @`, `$kiss @`, `$slap @`, `$punch @`, `$pat @`.
+- **Cute Animal Libraries (`animais/`):** `$dog`, `$cat`, `$cow`, `$pig`, `$fox`, `$koala` served from categorized local image folders.
+
+### 5. Moderation & Server Diagnostics (`$administracao`)
+| Command | Action |
+| --- | --- |
+| `$ban @` / `$unban <id>` | Ban or unban a member (`$membrosbanidos` lists bans) |
+| `$kick @` | Kick a member from the server |
+| `$mute @` / `$unmute @` | Toggle member mute |
+| `$lock` / `$unlock` | Lock or unlock text channel posting |
+| `$clear <count>` | Bulk-delete channel messages |
+| `$serverinfo` / `$userinfo @` | Inspect server stats or user profile/roles |
+| `$comopegarid` | Quick Discord Developer ID helper |
+| `$ping` / `$atts` / `$previsaoatts` | Latency check & bot release roadmap embeds |
+| `$donate` / `$mercadopago` | Store pricing packages & checkout links |
+
+---
+
+## Project Structure
+
+```text
+├── bot.py             # Main Discord event loop, embeds, moderation & economy commands
+├── asciiBot.py        # Pillow grayscale & ASCII character renderer
+├── strings.py         # Curated Tenor GIF collections for social interaction commands
+├── base.py            # Base64 encode/decode helpers
+├── amounts.json       # CCoins balance persistence
+├── casais.json        # Married pairs state persistence
+├── ddiamond.json      # DDiamond balance persistence
+├── animais/           # Categorized local image packs (dog, cat, fox, koala, pig, cow)
+├── acoes/             # Local action GIF assets
+└── requirements.txt   # requests, discord, PIL
+```
+
+---
+
+## Getting Started
+
+```bash
 git clone https://github.com/leonardogtcruz1/botstore.git
 cd botstore
 pip install -r requirements.txt
-python bot.py
+```
 
-DISCLAIMER -> You need to create a new bot in discord website and paste your token as it shown in the line 1610: client.run(TOKEN)
+1. Create a bot application in the [Discord Developer Portal](https://discord.com/developers/applications) and enable **Message Content**, **Server Members**, and **Presence** intents.
+2. Add your bot token in `bot.py` (`client.run(TOKEN)` — or load it safely from an environment variable such as `os.environ["DISCORD_TOKEN"]` before running):
 
-Leonardo Cruz - leogtdacruz@gmail.com
+```bash
+python3 bot.py
+```
+
+---
+
+## Author
+
+**Leonardo Cruz** — [GitHub](https://github.com/leonardogtcruz1)
